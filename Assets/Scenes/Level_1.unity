@@ -2473,7 +2473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 10
-  MaxHp: 200
+  MaxHp: 1000
   HpBar: {fileID: 1218453608}
   CooldownBar: {fileID: 1299636616}
 --- !u!50 &1179207496
@@ -3934,6 +3934,7 @@ MonoBehaviour:
   firepoint: {fileID: 78678934}
   speed: 20
   skillCooldown: 2
+  keyObject: {fileID: 6852657345952809571, guid: a165caa3a391d5348ae8c1b0f81959cf, type: 3}
 --- !u!1001 &8210414025904328962
 PrefabInstance:
   m_ObjectHideFlags: 0

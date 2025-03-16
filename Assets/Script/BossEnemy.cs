@@ -52,7 +52,7 @@ public class BossEnemy : Enemy
             Destroy(key, 10f);
         }
         base.Die();
-        SceneManager.LoadScene(2);
+        //SceneManager.LoadScene(2);
     }
     public void GayDam()
     {
