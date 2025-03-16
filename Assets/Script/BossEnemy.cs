@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BossEnemy : Enemy
 {
@@ -46,6 +47,7 @@ public class BossEnemy : Enemy
     {
         Debug.Log("Endgame");
         base.Die();
+        SceneManager.LoadScene(2);
     }
     public void GayDam()
     {
