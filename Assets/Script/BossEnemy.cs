@@ -16,6 +16,7 @@ public class BossEnemy : Enemy
     private float speed = 20f;
     [SerializeField] private float skillCooldown = 2f;
     private float nextTimeSkill = 0f;
+    [SerializeField] private GameObject keyObject;
 
     protected override void Update()
     {
@@ -44,7 +45,11 @@ public class BossEnemy : Enemy
     }
     protected override void Die()
     {
-        Debug.Log("Endgame");
+        if (keyObject != null)
+        {
+            GameObject key = Instantiate(keyObject, transform.position, Quaternion.identity);
+            Destroy(key, 10f);
+        }
         base.Die();
     }
     public void GayDam()
