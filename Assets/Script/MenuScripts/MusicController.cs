@@ -1,40 +1,88 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class MusicController : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
-    public Sprite soundOnSprite;  // Ảnh khi bật âm thanh
-    public Sprite soundOffSprite; // Ảnh khi tắt âm thanh
-    private Image buttonImage;
-    [SerializeField]
-    private bool isSoundOn = true; // Trạng thái mặc định
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static AudioManager instance;
+
+    [Header("Audio Sources")]
+    public AudioSource musicSource; // Nhạc nền
+    public AudioSource soundSource; // Âm thanh hiệu ứng
+
+    private bool isMusicOn;
+    private bool isSoundOn;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Giữ lại khi đổi màn
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+    }
+
     void Start()
     {
-        buttonImage = GetComponent<Image>(); // Lấy component Image của Button
-        UpdateButtonImage();
+        isMusicOn = PlayerPrefs.GetInt("Music", 1) == 1;
+        isSoundOn = PlayerPrefs.GetInt("Sound", 1) == 1;
+
+        ApplySettings();
+    }
+
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        ApplySettings(); // Cập nhật lại trạng thái khi đổi màn
+    }
+
+    public void ToggleMusic()
+    {
+        isMusicOn = !isMusicOn;
+        PlayerPrefs.SetInt("Music", isMusicOn ? 1 : 0);
+        PlayerPrefs.Save();
+        ApplySettings();
     }
 
     public void ToggleSound()
     {
-        isSoundOn = !isSoundOn; // Đảo trạng thái âm thanh
-        UpdateButtonImage();
-
-        // Xử lý bật/tắt âm thanh
-        if (isSoundOn)
-        {
-            // Bật âm thanh
-           // AudioListener.volume = 1f;
-        }
-        else
-        {
-            // Tắt âm thanh
-           // AudioListener.volume = 0f;
-        }
+        isSoundOn = !isSoundOn;
+        PlayerPrefs.SetInt("Sound", isSoundOn ? 1 : 0);
+        PlayerPrefs.Save();
+        ApplySettings();
     }
 
-    private void UpdateButtonImage()
+    private void ApplySettings()
     {
-        buttonImage.sprite = isSoundOn ? soundOnSprite : soundOffSprite;
+        if (musicSource != null)
+        {
+            musicSource.mute = !isMusicOn;
+        }
+        if (soundSource != null)
+        {
+            soundSource.mute = !isSoundOn;
+        }
+        AudioListener.volume = isSoundOn ? 1f : 0f;
+    }
+
+    public void PlaySoundEffect(AudioClip clip)
+    {
+        if (isSoundOn && soundSource != null)
+        {
+            soundSource.PlayOneShot(clip);
+        }
     }
 }
