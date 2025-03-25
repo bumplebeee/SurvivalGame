@@ -446,6 +446,7 @@ Transform:
   - {fileID: 1189713752}
   - {fileID: 759341054}
   - {fileID: 1085117507}
+  - {fileID: 1690954335}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &519420033
@@ -1364,7 +1365,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1085117507
 Transform:
   m_ObjectHideFlags: 0
@@ -1424,7 +1425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f5f6f3911fc4db48aed77d3fcf9aead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HoldEnery: 3
+  HoldEnery: 20
   boss: {fileID: 2127470931}
   energuBar: {fileID: 1507163629}
   gameUI: {fileID: 1684591174}
@@ -2183,6 +2184,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2bcab30e19182854097e15ec41593891, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1690954334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1690954335}
+  - component: {fileID: 1690954336}
+  m_Layer: 0
+  m_Name: Enemy_Monster_Generator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1690954335
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690954334}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.84, y: -9.47, z: 9.966316}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 519420032}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1690954336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1690954334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d554b8bdcfa2d2d43a824c58edcb6f8c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemyPrefab: {fileID: 8301440489652163518, guid: cee4a7ba72ecac14299fdb1dcbc8957e, type: 3}
+  poolSize: 3
+  spawnDelay: 5
 --- !u!224 &1843780717 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 862781948519587977, guid: 16b845f79187745468e4503e4753701c, type: 3}
