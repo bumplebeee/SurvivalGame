@@ -9,6 +9,7 @@ TagManager:
   - Energy
   - Explosion
   - EnemyBullet
+  - WinGame
   layers:
   - Default
   - TransparentFX

@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 public class GameObjectSc : MonoBehaviour
@@ -14,11 +14,14 @@ public class GameObjectSc : MonoBehaviour
     private Image energuBar;
     [SerializeField]
     private GameObject gameUI;
+    [SerializeField]
+    private GameObject winMenu;
     void Start()
     {
         curentEnery = 0;
         UpdateEnergyBar();
         boss.SetActive(false);
+        winMenu.SetActive(false);
     }
 
     // Update is called once per frame
@@ -45,14 +48,27 @@ public class GameObjectSc : MonoBehaviour
     {
         bossCall = true;
         boss.SetActive(true);
-        gameUI.SetActive(false);
 
+        // Ẩn tất cả các thành phần con trong gameUI trừ winMenu
+        foreach (Transform child in gameUI.transform)
+        {
+            if (child.gameObject != winMenu)
+            {
+                child.gameObject.SetActive(false);
+            }
+        }
     }
+
     public void UpdateEnergyBar()
     {
         if (energuBar != null) {
             float fillAmount = Mathf.Clamp01((float)curentEnery / (float)HoldEnery);
             energuBar.fillAmount = fillAmount;
         }
+    }
+    public void WinGame()
+    {
+        winMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 }
