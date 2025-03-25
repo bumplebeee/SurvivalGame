@@ -19,6 +19,10 @@ public class PlayerCollidor : MonoBehaviour
             Player player= GetComponent<Player>();
             player.TakeDamage(5f);
         }
+        if (collision.CompareTag("WinGame"))
+        {
+            GameObjectSc.WinGame();
+        }
     }
 
 }
